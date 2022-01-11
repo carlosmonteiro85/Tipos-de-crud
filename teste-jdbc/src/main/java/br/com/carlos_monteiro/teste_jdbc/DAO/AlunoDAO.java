@@ -9,6 +9,7 @@ import java.util.List;
 
 import br.com.carlos_monteiro.teste_jdbc.conexao.ConnectionFactory;
 import br.com.carlos_monteiro.teste_jdbc.modelo.Aluno;
+import br.com.carlos_monteiro.teste_jdbc.modelo.Estado;
 
 public class AlunoDAO {
 
@@ -27,7 +28,8 @@ public class AlunoDAO {
 				int id = result.getInt("id");
 				String nome = result.getString("nome");
 				int idade = result.getInt("idade");
-				String estado = result.getString("estado");
+				Estado estado = Estado.getNomeEstado(result.getString("estado"));
+//				String estado = result.getString("estado");
 
 				alunos.add(new Aluno(id, nome, idade, estado));
 			}
@@ -50,7 +52,7 @@ public class AlunoDAO {
 
 			pstm.setString(1, aluno.getNome());
 			pstm.setInt(2, aluno.getIdade());
-			pstm.setString(3, aluno.getEstado());
+			pstm.setString(3, aluno.getEstado().toString());
 
 			pstm.executeUpdate();
 
@@ -70,7 +72,7 @@ public class AlunoDAO {
 			PreparedStatement pstm = con.prepareStatement(sql);
 			pstm.setString(1, aluno.getNome());
 			pstm.setInt(2, aluno.getIdade());
-			pstm.setString(3, aluno.getEstado());
+			pstm.setString(3, aluno.getEstado().toString());
 			pstm.setInt(4, aluno.getId());
 
 			pstm.executeUpdate();
@@ -116,7 +118,7 @@ public class AlunoDAO {
 				aluno.setId(result.getInt("id"));
 				aluno.setNome(result.getString("nome"));
 				aluno.setIdade(result.getInt("idade"));
-				aluno.setEstado(result.getString("estado"));
+				aluno.setEstado(Estado.getNomeEstado(result.getString("estado")));
 			}
 
 		} catch (SQLException e) {
