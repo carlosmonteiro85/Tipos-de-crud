@@ -38,7 +38,6 @@ public class ConnectionFactory {
 
 			try {
 				con = DriverManager.getConnection(connectionURL, user, senha);
-				System.out.println("Sucesso ao se conectar ao BD");
 			} catch (SQLException e) {
 				System.out.println("Falha ao se conectar no BD");
 				throw new RuntimeException(e);

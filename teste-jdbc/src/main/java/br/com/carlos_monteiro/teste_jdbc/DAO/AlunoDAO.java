@@ -29,16 +29,12 @@ public class AlunoDAO {
 				String nome = result.getString("nome");
 				int idade = result.getInt("idade");
 				Estado estado = Estado.getNomeEstado(result.getString("estado"));
-//				String estado = result.getString("estado");
-
 				alunos.add(new Aluno(id, nome, idade, estado));
 			}
-
 		} catch (SQLException e) {
 			System.out.println(" A listagem de alunos falhou");
 			e.printStackTrace();
 		}
-
 		return alunos;
 	}
 
@@ -52,7 +48,7 @@ public class AlunoDAO {
 
 			pstm.setString(1, aluno.getNome());
 			pstm.setInt(2, aluno.getIdade());
-			pstm.setString(3, aluno.getEstado().toString());
+			pstm.setString(3, aluno.getEstado().nome());
 
 			pstm.executeUpdate();
 
@@ -72,7 +68,7 @@ public class AlunoDAO {
 			PreparedStatement pstm = con.prepareStatement(sql);
 			pstm.setString(1, aluno.getNome());
 			pstm.setInt(2, aluno.getIdade());
-			pstm.setString(3, aluno.getEstado().toString());
+			pstm.setString(3, aluno.getEstado().nome());
 			pstm.setInt(4, aluno.getId());
 
 			pstm.executeUpdate();
